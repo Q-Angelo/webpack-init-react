@@ -91,3 +91,9 @@ webpack才坑之路
 
 	对策4
 		此问题一般出现在webpack2中，解决办法很简单，将OccurenceOrderPlugin改为OccurrenceOrderPlugin即可
+
+
+解决
+fatal: remote webpack-init-react already exists.
+git remote set-url origin https://github.com/LongKnight/git-bas.git
+这将用新的替代现有的来源。

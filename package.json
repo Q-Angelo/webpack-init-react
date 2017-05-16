@@ -1,8 +1,9 @@
 {
-  "name": "react-mobile",
+  "name": "webpack-init-react",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "repository": "https://github.com/Q-Angelo/webpack-init-react.git",
   "scripts": {
     "start": "set NODE_ENV=dev && webpack-dev-server --progress --colors",
     "build": "rd/s/q build && set NODE_ENV=production && webpack --config ./webpack.server.js --progress --colors"
