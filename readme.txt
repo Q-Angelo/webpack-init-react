@@ -20,11 +20,7 @@ npm i html-webpack-plugin open-browser-webpack-plugin --save-dev
 npm i babel-core babel-loader babel-preset-es2015 babel-preset-react babel-plugin-react-transform --save-dev
 
 
-配置package.json文件
-	linux下配置：
-		"start": "NODE_ENV=dev webpack-dev-server --progress --colors"
-	windows下配置：
-		"start": "set NODE_ENV=dev && webpack-dev-server --progress --colors"
+
 
 webpack才坑之路
 	错误1：
@@ -73,3 +69,25 @@ webpack才坑之路
           }
         ]
     },
+
+    问题3
+    配置package.json文件，注意windows和linux 之间的不同按照下面的即可
+
+    对策3：
+    配置生产环境
+		linux下配置：
+			"start": "NODE_ENV=dev webpack-dev-server --progress --colors"
+		windows下配置：
+			"start": "set NODE_ENV=dev && webpack-dev-server --progress --colors"
+	配置开发环境
+		linux下配置：
+		"build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"		
+		windows下配置：
+		"build": "rd/s/q build && set NODE_ENV=production && webpack --config ./webpack.server.js --progress --colors"
+		如果还有问题 在项目目录下建一个build文件夹
+
+	问题4
+		OccurenceOrderPlugin构造器错误
+
+	对策4
+		此问题一般出现在webpack2中，解决办法很简单，将OccurenceOrderPlugin改为OccurrenceOrderPlugin即可

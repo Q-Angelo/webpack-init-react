@@ -7,7 +7,7 @@ import './static/css/common.less'
 class Hello extends React.Component {
     render() {
         return (
-           <div> <p>hello world123456</p> </div>
+           <div> <p>hello world</p> </div>
         )
     }
 }
