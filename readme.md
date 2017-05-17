@@ -76,9 +76,7 @@
 	      }
 	    }
 	  })
-	}
-
-
+	}  
 	错误2：
 	postcss-loader 有版本问题,高版本的会对低版本的配置报错
 	ERROR in ./~/css-loader!./~/postcss-loader/lib!./app/static/css/main.css
@@ -101,8 +99,7 @@
             },
           }
         ]
-    },
-
+    },  
     问题3
     配置package.json文件，注意windows和linux 之间的不同按照下面的即可
     对策3：
@@ -116,12 +113,12 @@
 		"build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"		
 		windows下配置：
 		"build": "rd/s/q build && set NODE_ENV=production && webpack --config ./webpack.server.js --progress --colors"
-		如果还有问题 在项目目录下建一个build文件夹
+		如果还有问题 在项目目录下建一个build文件夹  
 
 	问题4
 		OccurenceOrderPlugin构造器错误
 	对策4
-		此问题一般出现在webpack2中，解决办法很简单，将OccurenceOrderPlugin改为OccurrenceOrderPlugin即可
+		此问题一般出现在webpack2中，解决办法很简单，将OccurenceOrderPlugin改为OccurrenceOrderPlugin即可  
 
 	问题5：
 		ant-design与css Modules的冲突
@@ -139,4 +136,4 @@
 	        test: /\.css$/,
 	        include: /node_modules/,
 	        loader: 'style-loader!css-loader'
-	    }
+	    }  
