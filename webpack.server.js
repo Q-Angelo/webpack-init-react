@@ -20,48 +20,39 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' },
-            {
-                test: /\.css$/,
-                loaders: [
-                  "style-loader", 
-                  "css-loader?importLoaders=1", 
-                  {
-                    loader: "postcss-loader",
-                    options: {
-                      plugins: (loader)=>[
-                        require('autoprefixer')({
-                            broswers:['last 5 versions']
-                        })
-                      ]
-                    },
-                  }
-                ]
+            { 
+              test: /\.css$/, 
+              exclude: /node_modules/, 
+              loader: ExtractTextPlugin.extract({
+                fallback:'style-loader', 
+                use:'css-loader!postcss-loader'
+              })
             },
             {
-                test: /\.less$/,
-                exclude: /node_modules/,
-                loaders:[
-                  "style-loader", 
-                  "css-loader?importLoaders=2", 
-                  {
-                    loader: "postcss-loader",
-                    options: {
-                      plugins: (loader)=>[
-                        require('autoprefixer')({
-                            broswers:['last 5 versions']
-                        })
-                      ]
-                    },
-                  },
-                  "less-loader"
-                ]
+                test: /\.less$/, 
+                exclude: /node_modules/, 
+                loader: ExtractTextPlugin.extract({
+                  fallback:'style-loader', 
+                  use:'css-loader!less-loader'
+                })
             },
             { test:/\.(png|gif|jpg|jpeg|bmp)$/i, loader:'url-loader?limit=5000&name=img/[name].[chunkhash:8].[ext]' },
             { test:/\.(png|woff|woff2|svg|ttf|eot)($|\?)/i, loader:'url-loader?limit=5000&name=fonts/[name].[chunkhash:8].[ext]'}
         ]
     },
-
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+          options:{
+            postcss:()=>{
+              return [
+                require('autoprefixer')({
+                  browsers: ['last 10 versions','ie>=8','>1% in CN']
+                })
+              ]
+            }
+          }
+        }),
+
         // webpack 内置的 banner-plugin
         new webpack.BannerPlugin("Copyright by Q-Angelo@github.com."),
 
@@ -76,7 +67,6 @@ module.exports = {
             'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
           }
         }),
-
         // 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
         new webpack.optimize.OccurrenceOrderPlugin(),
         
