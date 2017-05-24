@@ -1,0 +1,8 @@
+
+SqlServer中间件 tedious 
+ githubAddress:  http://tediousjs.github.io/tedious/index.html
+
+React-language-selector:
+https://github.com/kenCode-de/react-language-selector
+
+i18next 实现中英文切换
