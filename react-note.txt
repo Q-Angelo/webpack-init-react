@@ -6,3 +6,8 @@ React-language-selector:
 https://github.com/kenCode-de/react-language-selector
 
 i18next 实现中英文切换
+
+//可滑动视图
+npm install --save react-swipeable-views 
+https://github.com/oliviertassinari/react-swipeable-views
+
