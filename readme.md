@@ -20,29 +20,29 @@ npm install webpack --save-dev
 ### 入口文件及打包后输出的存放路径
 
 ```javascript
-	const path = require('path');
+const path = require('path');
 
-	module.exports = {
-		//项目的入口文件
-    entry: path.resolve(__dirname, 'app/index.js'),
+module.exports = {
+	//项目的入口文件
+	entry: path.resolve(__dirname, 'app/index.js'),
 
 		//打包后输出的文件
-    output: {
-        filename: "bundle.js"
-    },
-	}
+	output: {
+		filename: "bundle.js"
+	},
+}
 ```
 
 ###  resolve对象
 
 ```javascript
-	module.exports = {
-		...
-		//在项目中import 倒入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
-		resolve: {
-				extensions: ['.js','.jsx']
-		},
-	}
+module.exports = {
+	...
+	//在项目中import 倒入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
+	resolve: {
+			extensions: ['.js','.jsx']
+	},
+}
 ```
 
 # loaders
