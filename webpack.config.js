@@ -1,7 +1,7 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, 'app/index.js'),
@@ -20,8 +20,8 @@ module.exports = {
             {
                 test: /\.css$/,
                 loaders: [
-                  "style-loader", 
-                  "css-loader?importLoaders=1", 
+                  "style-loader",
+                  "css-loader?importLoaders=1",
                   {
                     loader: "postcss-loader",
                     options: {
@@ -38,8 +38,8 @@ module.exports = {
                 test: /\.less$/,
                 exclude: /node_modules/,
                 loaders: [
-                  "style-loader", 
-                  "css-loader?importLoaders=2", 
+                  "style-loader",
+                  "css-loader?importLoaders=2",
                   {
                     loader: "postcss-loader",
                     options: {
@@ -79,7 +79,6 @@ module.exports = {
 
         new webpack.LoaderOptionsPlugin({
             options:{
-                
                 devServer: {
                     colors: true, //终端中输出结果为彩色
                     historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
