@@ -1,13 +1,13 @@
 # Webpack构建React开发与生产环境
 
-# 安装react、react-dom
+### 安装react、react-dom
 
 ```
 npm install react react-dom --save
 
 ```
 
-# 安装webpack插件  
+### 安装webpack插件  
 
 ```javascript
 //全局安装
@@ -17,7 +17,7 @@ npm install webpack -g
 npm install webpack --save-dev
 ```
 
-# 入口文件及打包后输出的存放路径
+### 入口文件及打包后输出的存放路径
 
 ```javascript
 	const path = require('path');
@@ -29,19 +29,20 @@ npm install webpack --save-dev
 		//打包后输出的文件
     output: {
         filename: "bundle.js"
-    }
+    },
 	}
 ```
 
-#  resolve对象
+###  resolve对象
 
 ```javascript
-    //在项目中import 倒入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
-	resolve: {
-			extensions: ['.js','.jsx']
-	},
-
-
+	module.exports = {
+		...
+		//在项目中import 倒入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
+		resolve: {
+				extensions: ['.js','.jsx']
+		},
+	}
 ```
 
 # loaders
