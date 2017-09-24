@@ -45,7 +45,7 @@ module.exports = {
 }
 ```
 
-# loaders
+### loaders
 
  > loader是webpack功能之一，通过设置不同的loader，webpack会调用外部的脚本工具，对不同格式的文件进行处理。例如将最新的ES6、ES7代码转化为浏览器可执行的ES5代码，将less、scss转换为浏览器可识别的css。
 
@@ -61,9 +61,11 @@ module.exports = {
 
 安装babel-loader 编译js文件
 ```javascript
-module: {
-	//各种loader的设置，下面分别介绍各loader的使用：
-	...
+module.exports = {
+	module: {
+		...
+		//各种loader的设置，下面分别介绍各loader的使用:
+	}
 }
 ```
 
@@ -80,13 +82,17 @@ npm i babel-core babel-loader babel-preset-es2015 babel-preset-react babel-plugi
 在loaders中配置如下代码：
 
 ```javascript
-
-{
-	test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
-	loader: 'babel-loader'
+module.exports = {
+	module: {
+		loaders: [
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader'
+			},
+		]
+	}
 }
-
 ```
 项目根目录中新建 ``` .babelrc ``` 文件
 
