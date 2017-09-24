@@ -1,4 +1,4 @@
-# Webpack构建React开发与生产环境
+# Webpack构建React开发环境
 
 ### 安装react、react-dom
 
@@ -38,9 +38,9 @@ module.exports = {
 ```javascript
 module.exports = {
 	...
-	//在项目中import 倒入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
+	//在项目中import 导入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
 	resolve: {
-			extensions: ['.js','.jsx']
+		extensions: ['.js','.jsx']
 	},
 }
 ```
@@ -69,7 +69,7 @@ module.exports = {
 }
 ```
 
-#### babel
+###### babel
 
 babel是一个编译javascript的平台，可以将ES6、ES7编译为浏览器兼容的版本
 
@@ -113,7 +113,7 @@ module.exports = {
 }
 ```
 
-#### CSS
+###### CSS
 
 > webpack提供两个工具处理样式表，```css-loader``` 使你能够使用类似@import 和 ```url(...)``` 的方法实现类似 ```require()```的功能，```style-loader``` 将所有计算后的样式加入页面中
 
@@ -132,26 +132,32 @@ npm i autoprefixer postcss-loader --save-dev
 在loaders中配置如下：
 
 ```javascript
-{
-		test: /\.css$/,
+module.exports = {
+	module: {
 		loaders: [
-			"style-loader",
-			"css-loader?importLoaders=1",
 			{
-				loader: "postcss-loader",
-				options: {
-					plugins: (loader)=>[
-						require('autoprefixer')({
-								broswers:['last 5 versions']
-						})
+					test: /\.css$/,
+					loaders: [
+						"style-loader",
+						"css-loader?importLoaders=1",
+						{
+							loader: "postcss-loader",
+							options: {
+								plugins: (loader)=>[
+									require('autoprefixer')({
+											broswers:['last 5 versions']
+									})
+								]
+							},
+						}
 					]
-				},
-			}
+			},
 		]
-},
+	}
+}
 ```
 
-#### CSS预处理器
+###### CSS预处理器
 
 * Less
 
@@ -160,28 +166,34 @@ npm i autoprefixer postcss-loader --save-dev
 代码示例
 
 ```javascript
-{
-		test: /\.less$/,
-		exclude: /node_modules/,
+module.exports = {
+	module: {
 		loaders: [
-			"style-loader",
-			"css-loader?importLoaders=2",
 			{
-				loader: "postcss-loader",
-				options: {
-					plugins: (loader)=>[
-						require('autoprefixer')({
-								broswers:['last 5 versions']
-						})
+					test: /\.less$/,
+					exclude: /node_modules/,
+					loaders: [
+						"style-loader",
+						"css-loader?importLoaders=2",
+						{
+							loader: "postcss-loader",
+							options: {
+								plugins: (loader)=>[
+									require('autoprefixer')({
+											broswers:['last 5 versions']
+									})
+								]
+							},
+						},
+						"less-loader"
 					]
-				},
-			},
-			"less-loader"
+			}
 		]
+	}
 }
 ```
 
-#### 图片处理
+###### 图片处理
 
 ```javascript
 //安装
@@ -189,34 +201,46 @@ npm i url-loader --save-dev
 ```
 
 ```javascript
-{
-		test:/\.(png|gif|jpg|jpeg|bmp)$/i,
-		loader:'url-loader',
-		query: {
-				limit: 1000,
-				name: 'img/[name]-[hash:5].[ext]'
-		}// 限制大小5kb
+module.exports = {
+	module: {
+		loaders: [
+			{
+					test:/\.(png|gif|jpg|jpeg|bmp)$/i,
+					loader:'url-loader',
+					query: {
+							limit: 1000,
+							name: 'img/[name]-[hash:5].[ext]'
+					}// 限制大小5kb
+			}
+		]
+	}
 }
 ```
 
-#### 字体处理
+###### 字体处理
 
 ```javascript
-{
-		test:/\.(woff|woff2|svg|ttf|eot)$/i,
-		loader:'url-loader',
-		query: {
-				limit: 1000,
-				name: 'fonts/[name]-[hash:5].[ext]'
-		}// 限制大小5kb
+module.exports = {
+	module: {
+		loaders: [
+			{
+					test:/\.(woff|woff2|svg|ttf|eot)$/i,
+					loader:'url-loader',
+					query: {
+							limit: 1000,
+							name: 'fonts/[name]-[hash:5].[ext]'
+					}// 限制大小5kb
+			}
+		]
+	}
 }
 ```
 
-# plugins (插件)
+### plugins (插件)
 
 >  插件用于扩展webpack功能，在整个构建过程中生效，执行相关的任务
 
-#### 声明版权
+###### 声明版权
 
 ```javascript
 // 安装
@@ -224,10 +248,14 @@ npm i url-loader --save-dev
 ```
 
 ```javascript
-  new webpack.BannerPlugin("Copyright by Q-Angelo@github.com."),
+module.exports = {
+	plugins: [
+		new webpack.BannerPlugin("Copyright by Q-Angelo@github.com."),
+	]
+}
 ```
 
-#### html模板插件
+###### html模板插件
 
 > 在plugins中使用html-webpack-plugin插件将会插入index.html文件
 
@@ -242,13 +270,17 @@ npm i html-webpack-plugin --save-dev
 ```
 
 ```javascript
-	new HtmlWebpackPlugin({
-			favicon:'./app/static/img/favicon.ico',
-			template: __dirname + '/app/index.tpl.html'
-	}),
+module.exports = {
+	plugins: [
+		new HtmlWebpackPlugin({
+				favicon:'./app/static/img/favicon.ico',
+				template: __dirname + '/app/index.tpl.html'
+		}),
+	]
+}
 ```
 
-#### 热加载插件   
+###### 热加载插件   
 
 ```javascript
 // 安装
@@ -256,10 +288,15 @@ npm i open-browser-webpack-plugin --save-dev
 ```
 
 ```javascript
+module.exports = {
+	plugins: [
+
+	]
+}
 new webpack.HotModuleReplacementPlugin()
 ```
 
-#### webpack构建本地服务器 devServer
+###### webpack构建本地服务器 devServer
 
 ``` 注意： ``` 主要用于开发环境调试
 
@@ -274,55 +311,71 @@ npm install webpack-dev-server --save-dev
 
 ```
 ```javascript
-    devServer: {
-        proxy: {
-            // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
-            // koa 代码在 ./mock 目录中，启动命令为 npm run mock
-            '/api': { target: 'http://127.0.0.1:3000/', secure: false }
-        },
-        historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-        inline: true, //实时刷新
-        contentBase:'/',
-				host: '127.0.0.1',
-	    	port: 8080,
-        hot: true  //使用热加载插件 HotModuleReplacementPlugin
-    }
+module.exports = {
+	plugins: [
+		devServer: {
+			proxy: {
+					// 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
+					// koa 代码在 ./mock 目录中，启动命令为 npm run mock
+					'/api': { target: 'http://127.0.0.1:3000/', secure: false }
+			},
+			historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
+			inline: true, //实时刷新
+			contentBase:'/',
+			host: '127.0.0.1',
+			port: 8080,
+			hot: true  //使用热加载插件 HotModuleReplacementPlugin
+		}
+	]
+}
 ```
 
-#### DefinePlugin
+###### DefinePlugin
 
 ```javascript
-// 定义为生产环境，编译 React 时压缩到最小
-new webpack.DefinePlugin({
-  'process.env':{
-    'NODE_ENV': '"production"'
-  }
-}),
+module.exports = {
+	plugins: [
+		// 定义为生产环境，编译 React 时压缩到最小
+		new webpack.DefinePlugin({
+		  'process.env':{
+		    'NODE_ENV': '"production"'
+		  }
+		}),
+	]
+}
 ```
 
-#### OccurrenceOrderPlugin
+###### OccurrenceOrderPlugin
 
 ```javascript
-// 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
-new webpack.optimize.OccurrenceOrderPlugin(),
+module.exports = {
+	plugins: [
+		// 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
+		new webpack.optimize.OccurrenceOrderPlugin(),
+	]
+}
 ```
 
-#### UglifyJsPlugin
+###### UglifyJsPlugin
 
 js代码压缩
 
 ```javascript
-new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      //supresses warnings, usually from module minification
-      warnings: false
-    },
-    beautify:false,
-    comments:false
-}),
+module.exports = {
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin({
+		    compress: {
+		      //supresses warnings, usually from module minification
+		      warnings: false
+		    },
+		    beautify:false,
+		    comments:false
+		}),
+	]
+}
 ```
 
-#### ExtractTextPlugin 分离CSS和JS文件
+###### ExtractTextPlugin 分离CSS和JS文件
 
 ```
 //安装
@@ -334,11 +387,15 @@ npm install extract-text-webpack-plugin --save-dev
 //引入
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// 分离CSS和JS文件
-new ExtractTextPlugin('/css/[name].[chunkhash:8].css'),
+module.exports = {
+	plugins: [
+		// 分离CSS和JS文件
+		new ExtractTextPlugin('/css/[name].[chunkhash:8].css'),
+	]
+}
 ```
 
-#### OptimizeCssAssetsPlugin css代码压缩
+###### OptimizeCssAssetsPlugin css代码压缩
 
 ```javascript
 //安装
@@ -349,35 +406,49 @@ npm install optimize-css-assets-webpack-plugin --save-dev
 //引入
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-//css代码压缩
-new OptimizeCssAssetsPlugin({
-  assetNameRegExp: /\.css$/g,
-  cssProcessor: require('cssnano'),
-  cssProcessorOptions: { discardComments: {removeAll: true } },
-  canPrint: true
-}),
+module.exports = {
+	plugins: [
+		//css代码压缩
+		new OptimizeCssAssetsPlugin({
+		  assetNameRegExp: /\.css$/g,
+		  cssProcessor: require('cssnano'),
+		  cssProcessorOptions: { discardComments: {removeAll: true } },
+		  canPrint: true
+		}),
+	]
+}
 ```
 
-#### 提供公共代码
+###### 提供公共代码
 
 ```javascript
-//提供公共代码
-new webpack.optimize.CommonsChunkPlugin({
-  name: 'vendor',
-  filename: '/js/[name].[chunkhash:8].js'
-}),
+
+module.exports = {
+	plugins: [
+		//提供公共代码
+		new webpack.optimize.CommonsChunkPlugin({
+		  name: 'vendor',
+		  filename: '/js/[name].[chunkhash:8].js'
+		}),
+	]
+}
 ```
 
-#### 将代码压缩成gz格式最小化文件大小这种格式需要与后段配合来使的浏览器去解析
+###### 将代码压缩成gz格式最小化文件大小这种格式需要与后段配合来使的浏览器去解析
 
 ```javascript
-new CompressionPlugin({
-  asset: "[path].gz[query]",
-  algorithm: "gzip",
-  test: /\.js$|\.css$|\.html$/,
-  threshold: 10240,
-  minRatio: 0.8
-})
+
+module.exports = {
+	plugins: [
+		new CompressionPlugin({
+		  asset: "[path].gz[query]",
+		  algorithm: "gzip",
+		  test: /\.js$|\.css$|\.html$/,
+		  threshold: 10240,
+		  minRatio: 0.8
+		})
+	]
+}
 ```
 
 # webpack与webpack-dev-server的区别：
