@@ -23,13 +23,12 @@ npm install webpack --save-dev
 const path = require('path');
 
 module.exports = {
-	//项目的入口文件
-	entry: path.resolve(__dirname, 'app/index.js'),
-
-		//打包后输出的文件
-	output: {
-		filename: "bundle.js"
-	},
+  //项目的入口文件
+  entry: path.resolve(__dirname, 'app/index.js'),
+  //打包后输出的文件
+  output: {
+    filename: "bundle.js"
+  },
 }
 ```
 
@@ -37,11 +36,11 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	...
-	//在项目中import 导入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
-	resolve: {
-		extensions: ['.js','.jsx']
-	},
+  ...
+  //在项目中import 导入模块的时候如果是 .js .jsx 等(需要自己定下)结尾的文件不要写后缀。
+  resolve: {
+    extensions: ['.js','.jsx']
+  },
 }
 ```
 
@@ -62,10 +61,10 @@ module.exports = {
 安装babel-loader 编译js文件
 ```javascript
 module.exports = {
-	module: {
-		...
-		//各种loader的设置，下面分别介绍各loader的使用:
-	}
+  module: {
+    ...
+    //各种loader的设置，下面分别介绍各loader的使用:
+  }
 }
 ```
 
@@ -83,15 +82,15 @@ npm i babel-core babel-loader babel-preset-es2015 babel-preset-react babel-plugi
 
 ```javascript
 module.exports = {
-	module: {
-		loaders: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
-			},
-		]
-	}
+  module: {
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+    ]
+  }
 }
 ```
 项目根目录中新建 ``` .babelrc ``` 文件
@@ -133,27 +132,27 @@ npm i autoprefixer postcss-loader --save-dev
 
 ```javascript
 module.exports = {
-	module: {
-		loaders: [
-			{
-					test: /\.css$/,
-					loaders: [
-						"style-loader",
-						"css-loader?importLoaders=1",
-						{
-							loader: "postcss-loader",
-							options: {
-								plugins: (loader)=>[
-									require('autoprefixer')({
-											broswers:['last 5 versions']
-									})
-								]
-							},
-						}
-					]
-			},
-		]
-	}
+  module: {
+    loaders: [
+      {
+          test: /\.css$/,
+          loaders: [
+            "style-loader",
+            "css-loader?importLoaders=1",
+            {
+              loader: "postcss-loader",
+              options: {
+                plugins: (loader)=>[
+                  require('autoprefixer')({
+                      broswers:['last 5 versions']
+                  })
+                ]
+              },
+            }
+          ]
+      },
+    ]
+  }
 }
 ```
 
@@ -167,29 +166,29 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	module: {
-		loaders: [
-			{
-					test: /\.less$/,
-					exclude: /node_modules/,
-					loaders: [
-						"style-loader",
-						"css-loader?importLoaders=2",
-						{
-							loader: "postcss-loader",
-							options: {
-								plugins: (loader)=>[
-									require('autoprefixer')({
-											broswers:['last 5 versions']
-									})
-								]
-							},
-						},
-						"less-loader"
-					]
-			}
-		]
-	}
+  module: {
+    loaders: [
+      {
+          test: /\.less$/,
+          exclude: /node_modules/,
+          loaders: [
+            "style-loader",
+            "css-loader?importLoaders=2",
+            {
+              loader: "postcss-loader",
+              options: {
+                plugins: (loader)=>[
+                  require('autoprefixer')({
+                      broswers:['last 5 versions']
+                  })
+                ]
+              },
+            },
+            "less-loader"
+          ]
+      }
+    ]
+  }
 }
 ```
 
@@ -202,18 +201,18 @@ npm i url-loader --save-dev
 
 ```javascript
 module.exports = {
-	module: {
-		loaders: [
-			{
-					test:/\.(png|gif|jpg|jpeg|bmp)$/i,
-					loader:'url-loader',
-					query: {
-							limit: 1000,
-							name: 'img/[name]-[hash:5].[ext]'
-					}// 限制大小5kb
-			}
-		]
-	}
+  module: {
+    loaders: [
+      {
+          test:/\.(png|gif|jpg|jpeg|bmp)$/i,
+          loader:'url-loader',
+          query: {
+              limit: 1000,
+              name: 'img/[name]-[hash:5].[ext]'
+          }// 限制大小5kb
+      }
+    ]
+  }
 }
 ```
 
@@ -221,18 +220,18 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	module: {
-		loaders: [
-			{
-					test:/\.(woff|woff2|svg|ttf|eot)$/i,
-					loader:'url-loader',
-					query: {
-							limit: 1000,
-							name: 'fonts/[name]-[hash:5].[ext]'
-					}// 限制大小5kb
-			}
-		]
-	}
+  module: {
+    loaders: [
+      {
+          test:/\.(woff|woff2|svg|ttf|eot)$/i,
+          loader:'url-loader',
+          query: {
+              limit: 1000,
+              name: 'fonts/[name]-[hash:5].[ext]'
+          }// 限制大小5kb
+      }
+    ]
+  }
 }
 ```
 
@@ -249,9 +248,9 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	plugins: [
-		new webpack.BannerPlugin("Copyright by Q-Angelo@github.com."),
-	]
+  plugins: [
+    new webpack.BannerPlugin("Copyright by Q-Angelo@github.com."),
+  ]
 }
 ```
 
@@ -271,12 +270,12 @@ npm i html-webpack-plugin --save-dev
 
 ```javascript
 module.exports = {
-	plugins: [
-		new HtmlWebpackPlugin({
-				favicon:'./app/static/img/favicon.ico',
-				template: __dirname + '/app/index.tpl.html'
-		}),
-	]
+  plugins: [
+    new HtmlWebpackPlugin({
+        favicon:'./app/static/img/favicon.ico',
+        template: __dirname + '/app/index.tpl.html'
+    }),
+  ]
 }
 ```
 
@@ -289,9 +288,9 @@ npm i open-browser-webpack-plugin --save-dev
 
 ```javascript
 module.exports = {
-	plugins: [
+  plugins: [
 
-	]
+  ]
 }
 new webpack.HotModuleReplacementPlugin()
 ```
@@ -304,7 +303,7 @@ new webpack.HotModuleReplacementPlugin()
 * ``` inline ``` : 设置为true，当源文件改变时会自动刷新页面
 * ``` colors ``` : 设置为true，使终端输出的文件为彩色的
 * ``` historyApiFallback ``` : 在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-* ``` contentBase ``` :	webpack-dev-server默认会为根文件夹提供本地服务器，如果想为另外一个目录下的文件提供本地服务器，应该在这里设置其所在目录（例如设置到"./public"目录）
+* ``` contentBase ``` :  webpack-dev-server默认会为根文件夹提供本地服务器，如果想为另外一个目录下的文件提供本地服务器，应该在这里设置其所在目录（例如设置到"./public"目录）
 
 ```
 npm install webpack-dev-server --save-dev
@@ -312,21 +311,21 @@ npm install webpack-dev-server --save-dev
 ```
 ```javascript
 module.exports = {
-	plugins: [
-		devServer: {
-			proxy: {
-					// 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
-					// koa 代码在 ./mock 目录中，启动命令为 npm run mock
-					'/api': { target: 'http://127.0.0.1:3000/', secure: false }
-			},
-			historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-			inline: true, //实时刷新
-			contentBase:'/',
-			host: '127.0.0.1',
-			port: 8080,
-			hot: true  //使用热加载插件 HotModuleReplacementPlugin
-		}
-	]
+  plugins: [
+    devServer: {
+      proxy: {
+          // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
+          // koa 代码在 ./mock 目录中，启动命令为 npm run mock
+          '/api': { target: 'http://127.0.0.1:3000/', secure: false }
+      },
+      historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
+      inline: true, //实时刷新
+      contentBase:'/',
+      host: '127.0.0.1',
+      port: 8080,
+      hot: true  //使用热加载插件 HotModuleReplacementPlugin
+    }
+  ]
 }
 ```
 
@@ -334,14 +333,14 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	plugins: [
-		// 定义为生产环境，编译 React 时压缩到最小
-		new webpack.DefinePlugin({
-		  'process.env':{
-		    'NODE_ENV': '"production"'
-		  }
-		}),
-	]
+  plugins: [
+    // 定义为生产环境，编译 React 时压缩到最小
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': '"production"'
+      }
+    }),
+  ]
 }
 ```
 
@@ -349,10 +348,10 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	plugins: [
-		// 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
-		new webpack.optimize.OccurrenceOrderPlugin(),
-	]
+  plugins: [
+    // 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
+    new webpack.optimize.OccurrenceOrderPlugin(),
+  ]
 }
 ```
 
@@ -362,16 +361,16 @@ js代码压缩
 
 ```javascript
 module.exports = {
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin({
-		    compress: {
-		      //supresses warnings, usually from module minification
-		      warnings: false
-		    },
-		    beautify:false,
-		    comments:false
-		}),
-	]
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          //supresses warnings, usually from module minification
+          warnings: false
+        },
+        beautify:false,
+        comments:false
+    }),
+  ]
 }
 ```
 
@@ -388,10 +387,10 @@ npm install extract-text-webpack-plugin --save-dev
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-	plugins: [
-		// 分离CSS和JS文件
-		new ExtractTextPlugin('/css/[name].[chunkhash:8].css'),
-	]
+  plugins: [
+    // 分离CSS和JS文件
+    new ExtractTextPlugin('/css/[name].[chunkhash:8].css'),
+  ]
 }
 ```
 
@@ -407,15 +406,15 @@ npm install optimize-css-assets-webpack-plugin --save-dev
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-	plugins: [
-		//css代码压缩
-		new OptimizeCssAssetsPlugin({
-		  assetNameRegExp: /\.css$/g,
-		  cssProcessor: require('cssnano'),
-		  cssProcessorOptions: { discardComments: {removeAll: true } },
-		  canPrint: true
-		}),
-	]
+  plugins: [
+    //css代码压缩
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: {removeAll: true } },
+      canPrint: true
+    }),
+  ]
 }
 ```
 
@@ -424,13 +423,13 @@ module.exports = {
 ```javascript
 
 module.exports = {
-	plugins: [
-		//提供公共代码
-		new webpack.optimize.CommonsChunkPlugin({
-		  name: 'vendor',
-		  filename: '/js/[name].[chunkhash:8].js'
-		}),
-	]
+  plugins: [
+    //提供公共代码
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: '/js/[name].[chunkhash:8].js'
+    }),
+  ]
 }
 ```
 
@@ -439,60 +438,60 @@ module.exports = {
 ```javascript
 
 module.exports = {
-	plugins: [
-		new CompressionPlugin({
-		  asset: "[path].gz[query]",
-		  algorithm: "gzip",
-		  test: /\.js$|\.css$|\.html$/,
-		  threshold: 10240,
-		  minRatio: 0.8
-		})
-	]
+  plugins: [
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
+  ]
 }
 ```
 
 # webpack与webpack-dev-server的区别：
-	webpack-dev-server只是个本地的文件服务器，它只做文件服务，生成的文件会在内存里，不做打包服务，当您更改资源中的某些内容时，将会重新加载文件。
-	如果第一次对文件打包可以使用webpack
+  webpack-dev-server只是个本地的文件服务器，它只做文件服务，生成的文件会在内存里，不做打包服务，当您更改资源中的某些内容时，将会重新加载文件。
+  如果第一次对文件打包可以使用webpack
 
 # 注意:save 和 --save-dev的区别
-	npm install时使用--save和--save-dev，可分别将依赖（插件）记录到package.json中的dependencies和devDependencies下面。
-	dependencies下记录的是项目在运行时必须依赖的插件，常见的react jquery等，即使项目打包好了、上线了，这些也是需要用的，否则程序无法正常执行。
-	devDependencies下记录的是项目在开发过程中使用的插件，但是一旦项目打包发布、上线了之后，webpack就都没有用了，可卸磨杀驴。
+  npm install时使用--save和--save-dev，可分别将依赖（插件）记录到package.json中的dependencies和devDependencies下面。
+  dependencies下记录的是项目在运行时必须依赖的插件，常见的react jquery等，即使项目打包好了、上线了，这些也是需要用的，否则程序无法正常执行。
+  devDependencies下记录的是项目在开发过程中使用的插件，但是一旦项目打包发布、上线了之后，webpack就都没有用了，可卸磨杀驴。
 
 # webpack踩坑之路
 
 #### 错误1：
 
 ```
-	configuration has an unknown property 'postcss'. These properties are valid:
+  configuration has an unknown property 'postcss'. These properties are valid:
 ```
 
 #### 对策1：
-	Webpack 2.1.0-beta23 之后的config里不能直接包含自定义配置项
-	解决：将postcss和devServer替换成以下写法即可（https://github.com/webpack/webpack/pull/2974#issuecomment-245857168）
+  Webpack 2.1.0-beta23 之后的config里不能直接包含自定义配置项
+  解决：将postcss和devServer替换成以下写法即可（https://github.com/webpack/webpack/pull/2974#issuecomment-245857168）
 
 ```javascript
-	plugins: {
-	  new webpack.LoaderOptionsPlugin({
-	    options: {
-	      postcss: function () {
-	        return [precss, autoprefixer];
-	      },
-	      devServer: {
-	        contentBase: "./public", //本地服务器所加载的页面所在的目录
-	        colors: true, //终端中输出结果为彩色
-	        historyApiFallback: true, //不跳转
-	        inline: true //实时刷新
-	      }
-	    }
-	  })
-	}
+  plugins: {
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: function () {
+          return [precss, autoprefixer];
+        },
+        devServer: {
+          contentBase: "./public", //本地服务器所加载的页面所在的目录
+          colors: true, //终端中输出结果为彩色
+          historyApiFallback: true, //不跳转
+          inline: true //实时刷新
+        }
+      }
+    })
+  }
 ```
 
 #### 错误2：
 
-	postcss-loader 有版本问题,高版本的会对低版本的配置报错
+  postcss-loader 有版本问题,高版本的会对低版本的配置报错
 
 ```javascript
 ERROR in ./~/css-loader!./~/postcss-loader/lib!./app/static/css/main.css
@@ -501,10 +500,10 @@ Module build failed: Error: No PostCSS Config found in:
 
 #### 对策2：
 
-	采用以下方法配置
+  采用以下方法配置
 
 ```javascript
-	{
+  {
         test: /\.css$/,
         loaders: [
           "style-loader",
@@ -539,7 +538,7 @@ windows下配置：```json "start": "set NODE_ENV=dev && webpack-dev-server --pr
 
  * 配置开发环境
 
-linux下配置：```json "build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"	```
+linux下配置：```json "build": "rm -rf ./build && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"  ```
 
 windows下配置：```json "build": "rd/s/q build && set NODE_ENV=production && webpack --config ./webpack.server.js --progress --colors" ```
 
@@ -547,28 +546,28 @@ windows每次build的时候需要在项目目录下建一个build文件夹，如
 
 #### 问题4
 
-		OccurenceOrderPlugin构造器错误
+    OccurenceOrderPlugin构造器错误
 
 #### 对策4
 
-		此问题一般出现在webpack2中，解决办法很简单，将OccurenceOrderPlugin改为OccurrenceOrderPlugin即可  
+    此问题一般出现在webpack2中，解决办法很简单，将OccurenceOrderPlugin改为OccurrenceOrderPlugin即可  
 
 #### 问题5
 
-		ant-design与css Modules的冲突，配置了css-modules的相关功能会把antd的样式也hash化了，导致样式不匹配
+    ant-design与css Modules的冲突，配置了css-modules的相关功能会把antd的样式也hash化了，导致样式不匹配
 
 #### 对策5：
 
-		定义两个css loaders像下面这样
+    定义两个css loaders像下面这样
 
 ```javascript
-		// CSS modules
-		{
-	      test: /\.css$/,
-	      exclude: /node_modules/,
-	      loader: 'style-loader!css-loader?modules'
-	  },
-	  //ant-design
+    // CSS modules
+    {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style-loader!css-loader?modules'
+    },
+    //ant-design
     {
         test: /\.css$/,
         include: /node_modules/,
